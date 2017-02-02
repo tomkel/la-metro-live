@@ -17,6 +17,7 @@
     "babel-polyfill": "^6.22.0",
     "babel-preset-env": "^1.1.8",
     "babel-preset-react": "^6.22.0",
+    "babel-preset-stage-2": "^6.22.0",
     "css-loader": "^0.26.1",
     "file-loader": "^0.10.0",
     "postcss-cssnext": "^2.9.0",
@@ -44,14 +45,18 @@
           },
           "useBuiltIns": true
         }
-      ]
+      ],
+      "stage-2"
     ],
     "plugins": [
       "react-hot-loader/babel"
     ]
   },
   "dependencies": {
+    "lodash": "^4.17.4",
     "react": "^15.4.2",
-    "react-dom": "^15.4.2"
+    "react-dom": "^15.4.2",
+    "react-google-maps": "^6.0.1",
+    "react-icons": "^2.2.3"
   }
 }

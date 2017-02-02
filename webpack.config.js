@@ -15,7 +15,7 @@ module.exports = {
     // bundle the client for hot reloading
     // only- means to only hot reload for successful updates
 
-    './index.js',
+    './index',
     // the entry point of our app
   ],
   output: {
@@ -29,6 +29,9 @@ module.exports = {
   },
 
   context: resolve(__dirname, 'src'),
+  resolve: {
+    extensions: ['.js', '.jsx', '.json'],
+  },
 
   devtool: 'inline-source-map',
 
@@ -46,7 +49,7 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.js$/,
+        test: /\.jsx?$/,
         use: [
           'babel-loader',
         ],
