@@ -14,11 +14,11 @@ class GMap extends React.Component {
   state = {
     markers: [{
       position: {
-        lat: 25.0112183,
-        lng: 121.52067570000001,
+        lat: 34.077643,
+        lng: -118.330058,
       },
-      key: 'Taiwan',
-      defaultAnimation: 2,
+      key: 'Los Angeles',
+      animation: 2,
     }],
   }
 
@@ -38,7 +38,7 @@ class GMap extends React.Component {
       ...this.state.markers,
       {
         position: event.latLng,
-        defaultAnimation: 2,
+        animation: 2,
         key: Date.now(), // Add a key property for: http://fb.me/react-warning-keys
       },
     ]
