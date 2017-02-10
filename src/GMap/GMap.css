@@ -1,0 +1,3 @@
+#markerLayer.anim > div {
+  transition: top 2s, left 2s;
+}

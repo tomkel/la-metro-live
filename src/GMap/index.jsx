@@ -1,9 +1,9 @@
 import React from 'react'
 import FaSpinner from 'react-icons/lib/fa/spinner'
 import GMapLoader from '../GMapLoader'
+import * as metro from '../metro'
 import './GMap.css'
 import blueBusIcon from './bus_icon_blue.svg'
-
 
 class GMap extends React.Component {
 
@@ -12,14 +12,21 @@ class GMap extends React.Component {
   }
 
   state = {
-    markers: [{
-      position: {
-        lat: 34.077643,
-        lng: -118.330058,
-      },
-      key: 'Los Angeles',
-      animation: 2,
-    }],
+    markers: [],
+  }
+
+  componentDidMount() {
+    this.interval = setInterval(this.updateMap, 1000)
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.interval)
+  }
+
+  updateMap = () => {
+    metro.locations(4).then(locs => ({ markers: locs }))
+      .then(locs => this.setState(locs))
+      .catch(console.error)
   }
 
   handleMapLoad = (map) => {
@@ -29,10 +36,6 @@ class GMap extends React.Component {
     }
   }
 
-  /*
-   * This is called when you click on the map.
-   * Go and try click now.
-   */
   handleMapClick = (event) => {
     const nextMarkers = [
       ...this.state.markers,
