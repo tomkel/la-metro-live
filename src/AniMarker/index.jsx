@@ -39,6 +39,8 @@ class AniMarker extends React.Component {
       <Marker
         options={{ optimized: false }}
         animation={this.animation.SMALL_DROP}
+        title={this.props.id}
+        icon={}
         {...this.props}
       />
     )
