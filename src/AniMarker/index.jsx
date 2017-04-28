@@ -1,14 +1,16 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { Marker } from 'react-google-maps'
+import busSymbol from './busSymbol'
 
 class AniMarker extends React.Component {
 
   static propTypes = {
-    position: React.PropTypes.shape({
-      lat: React.PropTypes.number,
-      lng: React.PropTypes.number,
+    position: PropTypes.shape({
+      lat: PropTypes.number,
+      lng: PropTypes.number,
     }).isRequired,
-    getMarkerLayer: React.PropTypes.func.isRequired,
+    getMarkerLayer: PropTypes.func.isRequired,
   }
 
   componentDidMount() {
@@ -40,7 +42,7 @@ class AniMarker extends React.Component {
         options={{ optimized: false }}
         animation={this.animation.SMALL_DROP}
         title={this.props.id}
-        icon={}
+        icon={busSymbol({ rotation: Number(this.props.heading), color: 'red' })}
         {...this.props}
       />
     )

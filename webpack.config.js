@@ -70,7 +70,7 @@ module.exports = {
       },
       {
         test: /\.svg$/,
-        use: ['url-loader'],
+        use: ['file-loader'],
       },
     ],
   },

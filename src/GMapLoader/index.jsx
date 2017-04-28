@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { withGoogleMap, GoogleMap, OverlayView } from 'react-google-maps'
 import withScriptjs from 'react-google-maps/lib/async/withScriptjs'
 import AniMarker from '../AniMarker'
@@ -6,7 +7,7 @@ import AniMarker from '../AniMarker'
 class GMapLoader extends React.Component {
 
   static propTypes = {
-    markers: React.PropTypes.array.isRequired,
+    markers: PropTypes.array.isRequired,
   }
 
   setMarkerLayer = (ref) => {

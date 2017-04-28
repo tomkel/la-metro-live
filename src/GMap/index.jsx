@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import FaSpinner from 'react-icons/lib/fa/spinner'
 import GMapLoader from '../GMapLoader'
 import * as metro from '../metro'
@@ -8,7 +9,7 @@ import blueBusIcon from './bus_icon_blue.svg'
 class GMap extends React.Component {
 
   static propTypes = {
-    toast: React.PropTypes.func.isRequired,
+    toast: PropTypes.func.isRequired,
   }
 
   state = {
