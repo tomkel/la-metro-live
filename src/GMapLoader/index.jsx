@@ -46,7 +46,6 @@ class GMapLoader extends React.Component {
             {...marker}
             key={marker.id}
             getMarkerLayer={this.getMarkerLayer}
-            position={{ lat: Number(marker.lat), lng: Number(marker.lon) }}
             onRightClick={() => this.props.onMarkerRightClick(marker)}
             onPositionChanged={() => console.log(marker.id, 'position changed')}
           />

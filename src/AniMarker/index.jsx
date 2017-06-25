@@ -6,10 +6,6 @@ import busSymbol from './busSymbol'
 class AniMarker extends React.Component {
 
   static propTypes = {
-    position: PropTypes.shape({
-      lat: PropTypes.number,
-      lng: PropTypes.number,
-    }).isRequired,
     getMarkerLayer: PropTypes.func.isRequired,
   }
 
@@ -18,17 +14,27 @@ class AniMarker extends React.Component {
   }
 
   shouldComponentUpdate(nextProps) {
-    return nextProps.position.lat !== this.props.position.lat ||
-      nextProps.position.lng !== this.props.position.lng
+    const diff = this.diffProps(nextProps)
+    return diff('lat') || diff('lon') || diff('secsSinceReport')
   }
 
-  componentWillUpdate() {
-    this.props.getMarkerLayer().classList.add('anim')
+  componentWillUpdate(nextProps) {
+    const diff = this.diffProps(nextProps)
+    if (diff('lat') || diff('lon')) {
+      this.props.getMarkerLayer().classList.add('anim')
+    }
   }
 
-  componentDidUpdate() {
-    console.log('update')
-    setTimeout(() => this.props.getMarkerLayer().classList.remove('anim'), 2100)
+  componentDidUpdate(prevProps) {
+    const diff = this.diffProps(prevProps)
+    if (diff('lat') || diff('lon')) {
+      console.log('update')
+      setTimeout(() => this.props.getMarkerLayer().classList.remove('anim'), 2100)
+    }
+  }
+
+  diffProps(nextProps) {
+    return name => nextProps[name] !== this.props[name]
   }
 
   animation = {
@@ -39,9 +45,10 @@ class AniMarker extends React.Component {
   render() {
     return (
       <Marker
+        position={{ lat: Number(this.props.lat), lng: Number(this.props.lon) }}
+        title={this.props.secsSinceReport}
         options={{ optimized: false }}
         animation={this.animation.SMALL_DROP}
-        title={this.props.id}
         icon={busSymbol({ rotation: Number(this.props.heading), color: 'red' })}
         {...this.props}
       />
