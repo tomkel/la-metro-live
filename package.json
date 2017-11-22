@@ -19,6 +19,7 @@
     "babel-preset-env": "^1.5.2",
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-2": "^6.24.1",
+    "caniuse-lite": "^1.0.30000769",
     "css-loader": "^0.28.4",
     "file-loader": "^0.11.2",
     "html-webpack-plugin": "^2.29.0",
@@ -56,9 +57,10 @@
   },
   "dependencies": {
     "prop-types": "^15.5.10",
+    "ramda": "^0.25.0",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
-    "react-google-maps": "8.1.0",
+    "react-google-maps": "9.2.2",
     "react-icons": "^2.2.5",
     "xml2js": "^0.4.17"
   }

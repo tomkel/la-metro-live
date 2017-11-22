@@ -3,6 +3,11 @@ import PropTypes from 'prop-types'
 import { Marker } from 'react-google-maps'
 import busSymbol from './busSymbol'
 
+const animation = {
+  BIG_DROP: 2,
+  SMALL_DROP: 4,
+}
+
 class AniMarker extends React.Component {
 
   static propTypes = {
@@ -37,19 +42,14 @@ class AniMarker extends React.Component {
     return name => nextProps[name] !== this.props[name]
   }
 
-  animation = {
-    BIG_DROP: 2,
-    SMALL_DROP: 4,
-  }
-
   render() {
     return (
       <Marker
         position={{ lat: Number(this.props.lat), lng: Number(this.props.lon) }}
         title={this.props.secsSinceReport}
         options={{ optimized: false }}
-        animation={this.animation.SMALL_DROP}
-        icon={busSymbol({ rotation: Number(this.props.heading), color: 'red' })}
+        animation={animation.SMALL_DROP}
+        icon={busSymbol({ rotation: Number(this.props.heading), busNumber: this.props.routeTag })}
         {...this.props}
       />
     )

@@ -1,19 +1,20 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import FaSpinner from 'react-icons/lib/fa/spinner'
+import * as R from 'ramda'
 import GMapLoader from '../GMapLoader'
 import * as metro from '../metro'
 import './GMap.css'
 import blueBusIcon from './bus_icon_blue.svg'
 
 class GMap extends React.Component {
-
   static propTypes = {
     toast: PropTypes.func.isRequired,
   }
 
   state = {
-    markers: [],
+    markers: {}, // key is bus number, value is location objects
+    buses: [4, 704], // array of bus numbers
   }
 
   componentDidMount() {
@@ -25,13 +26,18 @@ class GMap extends React.Component {
   }
 
   updateMap = () => {
-    metro.locations(4).then(locs => ({ markers: locs }))
-      .then(locs => this.setState(locs))
+    Promise.all(this.state.buses.map(bus =>
+      metro.locations(bus)
+        .then(locs => ({ [bus]: locs }))))
+      .then(R.mergeAll)
+      .then(locs => ({ markers: locs }))
+      // .then((a) => { console.log(a); return a; })
+      .then(newState => this.setState(newState))
       .catch(console.error)
   }
 
   handleMapLoad = (map) => {
-    this._mapComponent = map
+    this.mapComponent = map
     if (map) {
       console.log(map.getZoom())
     }
@@ -46,9 +52,9 @@ class GMap extends React.Component {
         key: Date.now(), // Add a key property for: http://fb.me/react-warning-keys
       },
     ]
-    this.setState({
-      markers: nextMarkers,
-    })
+    // this.setState({
+    //   markers: nextMarkers,
+    // })
 
     if (nextMarkers.length === 3) {
       this.props.toast(
@@ -65,9 +71,9 @@ class GMap extends React.Component {
      * web front end and even with google maps API.)
      */
     const nextMarkers = this.state.markers.filter(marker => marker !== targetMarker)
-    this.setState({
-      markers: nextMarkers,
-    })
+    // this.setState({
+    //   markers: nextMarkers,
+    // })
   }
 
   render() {

@@ -1,8 +1,10 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { withGoogleMap, GoogleMap, OverlayView } from 'react-google-maps'
-import withScriptjs from 'react-google-maps/lib/async/withScriptjs'
+import { withGoogleMap, GoogleMap, OverlayView, withScriptjs } from 'react-google-maps'
+import * as R from 'ramda'
 import AniMarker from '../AniMarker'
+
+const flattenMarkers = markers => R.flatten(R.values(markers))
 
 class GMapLoader extends React.Component {
 
@@ -41,7 +43,7 @@ class GMapLoader extends React.Component {
           <div />
         </OverlayView>
 
-        {this.props.markers.map(marker => (
+        {flattenMarkers(this.props.markers).map(marker => (
           <AniMarker
             {...marker}
             key={marker.id}
